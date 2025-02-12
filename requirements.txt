@@ -1,3 +1,4 @@
 gymnasium
 gymnasium[classic_control]
 gymnasium[other]
+scikit-learn
