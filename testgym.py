@@ -12,7 +12,7 @@ import gymnasium as gym
 import numpy as np
 from gymnasium.utils.play import play
 from gymnasium.utils.save_video import save_video
-from mycartpole import CartPoleEnv as MyCartPoleEnv
+from mycartpole import MyCartPoleEnv
 
 def try_cartpole():
     env = gym.make("CartPole-v1", render_mode="rgb_array_list")
@@ -59,8 +59,10 @@ gym.register(
 def user_play():
     # env = gym.make("CartPole-v1", render_mode="rgb_array")
     # play(env, keys_to_action={"a": 0, "d": 1})
-    env = gym.make("MyCartPoleEnv", render_mode="rgb_array")
-    play(env, keys_to_action={"a": 0, "d": 1})
+    # env = gym.make("MyCartPoleEnv", render_mode="rgb_array")
+    # play(env, keys_to_action={"a": 0, "d": 1})
+    env = gym.make("MyCartPoleEnv", render_mode="rgb_array", slow_motion_factor = 0.5)
+    play(env, keys_to_action={"a": 0, "d": 1}, noop=2)
 
 if __name__ == "__main__":
     user_play()
