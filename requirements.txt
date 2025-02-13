@@ -3,3 +3,10 @@ gymnasium[classic_control]
 gymnasium[other]
 scikit-learn
 neat-python
+
+# pytinyrenderer needs Python.h
+# sudo dnf install python3-devel
+# sudo dnf groupinstall "Development Tools"
+# sudo dnf install gcc gcc-c++ make cmake
+jax
+git+https://github.com/EMI-Group/tensorneat.git
