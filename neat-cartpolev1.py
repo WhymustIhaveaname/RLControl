@@ -9,13 +9,30 @@
 
 import os
 import neat
+import gymnasium as gym
+from gymnasium.utils.save_video import save_video
+
+env = gym.make("CartPole-v1", render_mode="rgb_array_list")
+
+def eval_one_genome(genome, config):
+    genome.fitness = 0  # start with fitness level of 0
+    net = neat.nn.FeedForwardNetwork.create(genome, config)
+
+    obs, _ = env.reset()
+    done = False
+
+    while not done and genome.fitness < 1500:
+        action = net.activate(obs)
+        action = 1 if action[0] > 0 else 0
+        obs, reward, done, *_ = env.step(action)
+        genome.fitness += reward
+
 
 def eval_genomes(genomes, config):
     for genome_id, genome in genomes:
-        genome.fitness = 0  # start with fitness level of 0
-        net = neat.nn.FeedForwardNetwork.create(genome, config)
-        print(genome_id, genome, net)
-        input()
+        eval_one_genome(genome, config)
+        # print(genome_id, genome.fitness)
+
 
 def main(config_path):
     config = neat.Config(
@@ -35,4 +52,4 @@ def main(config_path):
     print("Best fitness -> {}".format(winner))
 
 if __name__ == "__main__":
-    main("config-cartpolev1.txt")
+    main("config-cartpolev1.ini")
